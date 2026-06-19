@@ -2,10 +2,61 @@
 {% block title %}Inicio{% endblock %}
 
 {% block content %}
-
 <div class="container">
-    <h1>Bienvenido a Mini-core Flask</h1>
-    <p>Esta es la página de inicio de tu aplicación Flask.</p>
+    <h1>Envios registrados</h1>
 
+    <form class="filter-form" method="GET" action="/">
+        <div class="form-group">
+            <label for="fecha_inicio">Fecha inicio</label>
+            <input
+                type="date"
+                id="fecha_inicio"
+                name="fecha_inicio"
+                value="{{ fecha_inicio or '' }}"
+            >
+        </div>
+
+        <div class="form-group">
+            <label for="fecha_fin">Fecha fin</label>
+            <input
+                type="date"
+                id="fecha_fin"
+                name="fecha_fin"
+                value="{{ fecha_fin or '' }}"
+            >
+        </div>
+
+        <button type="submit">Filtrar</button>
+        <a class="clear-link" href="/">Limpiar</a>
+    </form>
+
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Nombre del repartidor</th>
+                <th>Cantidad de envios</th>
+                <th>Total de kg</th>
+                <th>Zona</th>
+                <th>Tarifa aplicada</th>
+                <th>Costo total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for envio, repartidor, zona in envios %}
+            <tr>
+                <td>{{ repartidor.nombre_Repartidor }}</td>
+                <td>{{ envio.cantidad_envios }}</td>
+                <td>{{ envio.total_peso_kg }}</td>
+                <td>{{ zona.nombre_zona }}</td>
+                <td>{{ zona.tarifa_por_kg }}</td>
+                <td>{{ envio.costo_total }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="7" class="empty-message">No hay envios para mostrar.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}
