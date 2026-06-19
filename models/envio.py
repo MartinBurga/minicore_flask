@@ -1,6 +1,6 @@
 from utils.db import db
 
-class envio(db.Model):
+class Envio(db.Model):
     __tablename__ = 'envio'
     
     id_envio = db.Column(db.Integer, primary_key=True)

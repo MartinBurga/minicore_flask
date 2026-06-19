@@ -1,6 +1,6 @@
 from utils.db import db
 
-class zona(db.Model):
+class Zona(db.Model):
     __tablename__ = 'zona'
     
     id_zona = db.Column(db.Integer, primary_key=True)

@@ -1,6 +1,6 @@
 from utils.db import db
 
-class repartidor(db.Model):
+class Repartidor(db.Model):
     __tablename__ = 'repartidor'
     
     id_repartidor = db.Column(db.Integer, primary_key=True)
