@@ -104,3 +104,6 @@ Antes de desplegar, configura en Vercel las variables:
 
 - `.env`, entornos virtuales, cache de Python y archivos temporales estan excluidos en `.gitignore`.
 - `datasql.py` solo inserta datos si las tablas estan vacias.
+
+## Link a video demostrativo:
+https://youtu.be/cCAUjSw-Yzo
