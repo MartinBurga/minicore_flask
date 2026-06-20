@@ -27,7 +27,7 @@
         </div>
 
         <button type="submit">Filtrar</button>
-        <a class="clear-link" href="/">Limpiar</a>
+        <a class="clear-link" href="/">Reiniciar</a>
     </form>
 
     <table class="data-table">
@@ -42,20 +42,35 @@
             </tr>
         </thead>
         <tbody>
-            {% for envio, repartidor, zona in envios %}
+            {% for cantidad_envios, total_peso_kg, costo_total, zona, tarifa_por_kg, repartidor in envios %}
             <tr>
                 <td>{{ repartidor.nombre_Repartidor }}</td>
-                <td>{{ envio.cantidad_envios }}</td>
-                <td>{{ envio.total_peso_kg }}</td>
-                <td>{{ zona.nombre_zona }}</td>
-                <td>{{ zona.tarifa_por_kg }}</td>
-                <td>{{ envio.costo_total }}</td>
+                <td>{{ cantidad_envios }}</td>
+                <td>
+                    {% if cantidad_envios %}
+                        {{ "%.2f"|format(total_peso_kg) }} kg
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+                <td>{{ zona or "-"|safe }}</td>
+                <td>
+                    {% if tarifa_por_kg %}
+                        ${{ "%.2f"|format(tarifa_por_kg) }}
+                    {% elif cantidad_envios %}
+                        Variable
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+                <td>
+                    {% if cantidad_envios %}
+                        ${{ "%.2f"|format(costo_total) }}
+                    {% else %}
+                        No aplica
+                    {% endif %}
+                </td>
             </tr>
-            {% else %}
-            <tr>
-                <td colspan="7" class="empty-message">No hay envios para mostrar.</td>
-            </tr>
-            {% endfor %}
         </tbody>
     </table>
 </div>
