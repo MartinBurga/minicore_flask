@@ -6,11 +6,6 @@ from models.zona import Zona
 from utils.db import db
 
 
-def costoEnvio(envio, zona):
-    costototal = envio.peso_kg * zona.tarifa_por_kg
-    return costototal
-
-
 def join_consulta(condiciones_envio):
     cantidad_zonas = db.func.count(db.distinct(Zona.id_zona))
 
